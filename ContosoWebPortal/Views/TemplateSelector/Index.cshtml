@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewData["Title"] = "TemplateSelector";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    tbody tr {
+        cursor:pointer;
+    }
+    #template-selection {
+        margin-top: 40px;
+    }
+</style>
+
+<script>
+    jQuery(document).ready(function() {
+        jQuery('#sample-report').click(function () {
+            $('#sample-report-loading').removeClass('hide');
+            $('#sample-report').attr('disabled', 'disabled');
+            console.log("creating.");
+            jQuery.getJSON('select/sample_report').then(function (data) {
+                console.log(data);
+                console.log("created.");
+                $('#sample-report').removeAttr('disabled');
+                window.location = data.webUrl;
+            });
+        });
+    });
+</script>
+
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3" id="template-selection">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading text-center"><h4>Template Selection</h4></div>
+            <div class="panel-body text-center">
+                <p>Please select a template for data analysis below.</p>
+            </div>
+
+            <!-- Table -->
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Template Name</th>
+                        <th>Author</th>
+                        <th>Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a id="sample-report">Sample Report</a>
+                            <i class="spin glyphicon glyphicon-refresh hide" id="sample-report-loading"></i>
+                        </td>
+                        <td>Suzie Queue &lt;suzieq@contoso.com&gt;</td>
+                        <td>3 days ago</td>
+                    </tr>
+                    <tr>
+                        <td>Sample Report with Data</td>
+                        <td>Andy Azure &lt;andyazure@contoso.com&gt;</td>
+                        <td>5 days ago</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="panel-footer"></div>
+        </div>
+
+    </div>
+</div>
